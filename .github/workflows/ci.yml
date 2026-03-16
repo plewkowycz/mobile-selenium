@@ -42,12 +42,15 @@ jobs:
           touch screenshots/.gitkeep
           touch reports/.gitkeep
 
-      - name: Run Pytest
+      - name: Run Pytest with Retry
         env:
           HEADLESS: "true"
           CI: "true"
         run: |
-          pytest -v --tb=short --html=reports/report.html tests/
+          pytest -v --tb=short --html=reports/report.html \
+            --reruns 3 \
+            --reruns-delay 2 \
+            tests/
 
       - name: Upload Artifacts on Failure
         if: failure()

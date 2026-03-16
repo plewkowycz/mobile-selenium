@@ -85,6 +85,8 @@ mobile-selenium/
 - **Multiple Fallbacks**: Primary and secondary locators/methods
 - **Graceful Degradation**: Continue test flow when non-critical elements fail  
 - **Modal Management**: Automatic dismissal of common overlays
+- **Built-in Retry Logic**: Selenium WebDriverWait with configurable retry attempts
+- **Smart Exception Handling**: Catches StaleElementReferenceException and TimeoutException
 
 ### Scalability Features
 - **Base Test Class**: Common setup/teardown and reusable methods
