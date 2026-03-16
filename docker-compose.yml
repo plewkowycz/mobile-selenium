@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  tests:
+    build: .
+    volumes:
+      # Map reports and screenshots directories to the host
+      - ./reports:/app/reports
+      - ./screenshots:/app/screenshots
+    environment:
+      # Pass any custom environment variables here
+      - HEADLESS=true
+      - BROWSER=chrome
+      - MOBILE_DEVICE=Pixel 7
