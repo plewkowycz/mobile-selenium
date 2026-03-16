@@ -46,8 +46,6 @@ class BaseTwitchTest:
     ) -> str:
         """Common flow to search for a streamer and return channel name with retry logic."""
         from pages.home_page import HomePage
-        from pages.search_page import SearchPage
-        from pages.streamer_page import StreamerPage
         
         def perform_search():
             # Search flow
