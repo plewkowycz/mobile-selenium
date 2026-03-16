@@ -43,7 +43,10 @@ class BasePage:
             self.driver.execute_script("window.scrollBy(0, window.innerHeight);")
             # Wait for scroll to complete using JS check instead of sleep
             self.wait._resolve_wait(1).until(
-                lambda driver: driver.execute_script("return window.pageYOffset;") != current_offset
+                lambda driver: (
+                    driver.execute_script("return window.pageYOffset;")
+                    != current_offset
+                )
             )
 
     def _is_element_present(self, locator: Tuple[str, str]) -> bool:

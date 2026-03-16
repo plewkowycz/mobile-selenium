@@ -40,13 +40,17 @@ class StreamerPage(BasePage):
             # If not /videos/, wait for any channel path (single segment)
             current_url = self.driver.current_url
             # Give a moment for navigation to complete
-            self.wait._resolve_wait(2).until(lambda d: d.execute_script("return document.readyState") == "complete")
-        
+            self.wait._resolve_wait(2).until(
+                lambda d: d.execute_script("return document.readyState") == "complete"
+            )
+
         # Wait for page to be fully ready
         self.wait._resolve_wait(5).until(
-            lambda driver: driver.execute_script("return document.readyState") == "complete"
+            lambda driver: (
+                driver.execute_script("return document.readyState") == "complete"
+            )
         )
-        
+
         # Try to find any meaningful element that indicates we're on a stream page
         try:
             self.wait.wait_for_element(self.VIDEO_PLAYER, timeout=5)
@@ -62,7 +66,7 @@ class StreamerPage(BasePage):
                     self.wait._resolve_wait(3).until(
                         lambda driver: driver.current_url == current_url
                     )
-        
+
         return self
 
     def get_channel_name(self) -> str:
@@ -92,7 +96,9 @@ class StreamerPage(BasePage):
                         url = self.driver.current_url
                         if "/videos/" in url:
                             # Extract channel name from URL like /channel/videos/
-                            path_parts = [p for p in url.split("/") if p and p != "videos"]
+                            path_parts = [
+                                p for p in url.split("/") if p and p != "videos"
+                            ]
                             if path_parts:
                                 return path_parts[-1].replace("-", " ").title()
                         return "Unknown Channel"

@@ -12,7 +12,7 @@ class TestTwitchStarCraftSearch(BaseTwitchTest):
         """Test searching for StarCraft II and opening first streamer."""
         # Use the common search flow from base class
         channel_name = self.search_and_validate_streamer(driver, wait, "StarCraft II")
-        
+
         # Validate we got a real channel name
         assert channel_name.strip() != "", "Failed to extract a valid channel name."
         assert len(channel_name) > 2, "Channel name seems too short."

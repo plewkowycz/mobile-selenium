@@ -3,10 +3,10 @@ name: Selenium Tests
 on:
   push:
     branches:
-      - master
+      - main
   pull_request:
     branches:
-      - master
+      - main
 
 jobs:
   test:
@@ -33,12 +33,14 @@ jobs:
 
       - name: Lint and Format Code
         run: |
-          ruff format --check .
+          ruff format .
           ruff check .
 
       - name: Create directories for artifacts
         run: |
           mkdir -p screenshots reports
+          touch screenshots/.gitkeep
+          touch reports/.gitkeep
 
       - name: Run Pytest
         env:

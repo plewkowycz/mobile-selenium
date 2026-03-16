@@ -17,13 +17,13 @@ class HomePage(BasePage):
     def open(self, base_url: str) -> HomePage:
         """Navigate to the base URL and return the HomePage instance."""
         self.driver.get(base_url)
-        
+
         # Dismiss cookie/consent banners before interacting with the page
         ModalHandler(self.driver, self.wait).dismiss_all()
-        
+
         # Wait for Browse button to be available
         self._get_element(self.BROWSE_BUTTON)
-        
+
         return self
 
     def click_search(self) -> SearchPage:

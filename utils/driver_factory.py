@@ -40,6 +40,7 @@ class DriverFactory:
 
         # ── Headless mode (CI only) ───────────────────────────────────
         import os
+
         if os.getenv("CI") or settings.HEADLESS:
             options.add_argument("--headless=new")
 
@@ -48,6 +49,8 @@ class DriverFactory:
         driver = webdriver.Chrome(service=service, options=options)
 
         # ── Post-init anti-detection ─────────────────────────────────
-        driver.execute_script("Object.defineProperty(navigator, 'webdriver', {get: () => undefined})")
+        driver.execute_script(
+            "Object.defineProperty(navigator, 'webdriver', {get: () => undefined})"
+        )
 
         return driver

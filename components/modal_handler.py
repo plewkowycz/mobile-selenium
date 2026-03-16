@@ -87,13 +87,18 @@ class ModalHandler:
                 }
             });
         """)
-        
+
         # Give JS a moment to take effect
         from utils.wait_helper import WaitHelper
-        temp_wait = WaitHelper(self.driver, 1)
-        temp_wait._resolve_wait(1).until(lambda d: d.execute_script("return document.readyState") == "complete")
 
-        short_wait = WebDriverWait(self.driver, 1) # Reduced from 3s to prevent test starvation
+        temp_wait = WaitHelper(self.driver, 1)
+        temp_wait._resolve_wait(1).until(
+            lambda d: d.execute_script("return document.readyState") == "complete"
+        )
+
+        short_wait = WebDriverWait(
+            self.driver, 1
+        )  # Reduced from 3s to prevent test starvation
 
         # 2. Handle "Open App for …" interstitial by going back
         self._dismiss_open_app_interstitial(short_wait)
@@ -117,7 +122,10 @@ class ModalHandler:
             # way to return to the test flow without opening the native app.
             self.driver.back()
             from utils.wait_helper import WaitHelper
+
             temp_wait = WaitHelper(self.driver, 1)
-            temp_wait._resolve_wait(1).until(lambda d: d.execute_script("return document.readyState") == "complete")
+            temp_wait._resolve_wait(1).until(
+                lambda d: d.execute_script("return document.readyState") == "complete"
+            )
         except TimeoutException:
             pass
