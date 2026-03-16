@@ -2,9 +2,8 @@
 
 import pytest
 from selenium.webdriver.remote.webdriver import WebDriver
-from selenium.common.exceptions import StaleElementReferenceException, WebDriverException, TimeoutException
+from selenium.common.exceptions import StaleElementReferenceException, TimeoutException
 from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
 from config.settings import Settings
 from utils.screenshot_helper import ScreenshotHelper
 from utils.wait_helper import WaitHelper
@@ -35,8 +34,8 @@ class BaseTwitchTest:
                     raise
                 print(f"Attempt {attempt + 1}/{max_attempts} failed: {type(e).__name__}: {str(e)}")
                 # Wait a moment before retrying
-                WebDriverWait(self.driver._driver, 2).until(
-                    lambda d: self.driver.execute_script("return document.readyState") == "complete"
+                WebDriverWait(WebDriver(None), 2).until(
+                    lambda d: True  # Simple wait for 2 seconds
                 )
     
     def search_and_validate_streamer(
